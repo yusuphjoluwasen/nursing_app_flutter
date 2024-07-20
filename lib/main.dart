@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           Provider<FirestoreProvider>(
             create: (_) => FirestoreProvider(
               firebaseFirestore: _firebaseFirestore,
+              firebaseAuth: _firebaseAuth,
               prefs: prefs,
             ),
           ),

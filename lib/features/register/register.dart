@@ -12,7 +12,7 @@ import '../../model/model.dart';
 import '../../reusables/form/input_decoration.dart';
 import '../../provider/auth_provider.dart';
 import '../home/home.dart';
-import '../login/login_play.dart';
+import '../login/login.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key, required this.userType});
@@ -229,7 +229,7 @@ class RegisterFormState extends State<RegisterForm> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const LoginPlay(),
+                        builder: (context) => const Login(),
                       ),
                     );
                   },

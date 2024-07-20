@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/config/app_strings.dart';
+import 'package:nursing_mother_medical_app/features/login/login.dart';
 import 'package:nursing_mother_medical_app/features/supportlibrary/support_library.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:provider/provider.dart';
 import '../../reusables/LoadingView.dart';
 import '../appointment/my_appointment_page.dart';
 import '../appointment/proffesional_appointment_page.dart';
+import '../../provider/providers.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -41,6 +43,57 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  Future<void> _signOut() async {
+    final authProvider = Provider.of<AuthProviders>(context, listen: false);
+    await authProvider.handleSignOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()),
+    );
+  }
+
+  Future<void> _deleteUser() async {
+    final authProvider = Provider.of<AuthProviders>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    final userId = authProvider.userFirebaseId;
+    if (userId != null) {
+      await userProvider.deleteUser(userId);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+    }
+  }
+
+  Future<void> _showDeleteConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // User must tap a button to dismiss the dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Account'),
+          content: const Text('Are you sure you want to delete your account? This action cannot be undone.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteUser();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +109,12 @@ class _ProfilePageState extends State<ProfilePage> {
           textAlign: TextAlign.center,
         ),
         backgroundColor: AppColors.bgColor,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: _signOut,
+          ),
+        ],
       ),
       body: _isLoading
           ? const Center(child: LoadingView())
@@ -136,6 +195,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
               ),
               onTap: () {},
+            ),
+            const SizedBox(height: 5),
+            GestureDetector(
+              onTap: _showDeleteConfirmationDialog,
+              child: CardItem(
+                cardItem: const {
+                  'title': 'Delete Account',
+                  'image': 'assets/images/messaging_item_icon.png',
+                },
+              ),
             ),
           ],
         ),

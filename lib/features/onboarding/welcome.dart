@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nursing_mother_medical_app/features/login/login_play.dart';
+import 'package:nursing_mother_medical_app/features/login/login.dart';
 import 'package:nursing_mother_medical_app/features/register/register.dart';
 
 import '../../config/app_colors.dart';
@@ -71,7 +71,7 @@ class WelcomePage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const LoginPlay(),
+              builder: (context) => const Login(),
             ),
           );
         },

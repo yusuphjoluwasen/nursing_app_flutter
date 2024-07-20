@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/config/app_measurements.dart';
 import 'package:nursing_mother_medical_app/config/app_strings.dart';
+import 'package:nursing_mother_medical_app/features/login/forgot_pasword.dart';
 import 'package:nursing_mother_medical_app/features/register/register.dart';
 import 'package:nursing_mother_medical_app/features/supportlibrary/support_library.dart';
 import 'package:nursing_mother_medical_app/reusables/form/app_button.dart';
@@ -15,31 +16,31 @@ import '../home/home.dart';
 
 //original
 
-class LoginPlay extends StatelessWidget {
-  const LoginPlay({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppColors.bgColor,
-      body: MyCustomForm(),
+      body: LoginForm(),
     );
   }
 }
 
 // Create a Form widget.
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  LoginFormState createState() {
+    return LoginFormState();
   }
 }
 
 // Create a corresponding State class.
 // This class holds data related to the form.
-class MyCustomFormState extends State<MyCustomForm> {
+class LoginFormState extends State<LoginForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   //
@@ -57,9 +58,9 @@ class MyCustomFormState extends State<MyCustomForm> {
       if (authProvider.status.type == StatusType.authenticateError) {
         Fluttertoast.showToast(msg: authProvider.status.errorMessage ?? "");
       } else if (authProvider.status.type == StatusType.authenticateCanceled) {
-        Fluttertoast.showToast(msg: "Sign in canceled");
+        Fluttertoast.showToast(msg: "Log in canceled");
       } else if (authProvider.status.type == StatusType.authenticated) {
-        Fluttertoast.showToast(msg: "Sign in success");
+        Fluttertoast.showToast(msg: "Log in success");
       }
     });
 
@@ -179,7 +180,14 @@ class MyCustomFormState extends State<MyCustomForm> {
                     height: 10,
                   ),
                   GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage(),
+                          ),
+                        );
+                      },
                       child: Center(
                           child: Text("Forgot Password",
                               style: Theme.of(context)

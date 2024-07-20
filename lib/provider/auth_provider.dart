@@ -27,7 +27,6 @@ class Status {
   }
 }
 
-
 enum StatusType {
   uninitialized,
   authenticated,
@@ -65,7 +64,7 @@ class AuthProviders extends ChangeNotifier {
     final downloadUrl = await storageProvider.uploadImage(imageFile, register.firstname);
 
     if (downloadUrl == null) {
-      print("coulnt save image");
+      print("Couldn't save image");
       _status = Status.authenticateError("Couldn't save image");
       notifyListeners();
       return false;
@@ -131,6 +130,23 @@ class AuthProviders extends ChangeNotifier {
       _status = Status.authenticateError(e.message ?? "Couldn't log in user");
       notifyListeners();
       return false;
+    }
+  }
+
+  Future<void> forgotPassword(String email) async {
+    _status = Status.authenticating;
+    notifyListeners();
+
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+      _status = Status.authenticated;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      _status = Status.authenticateError(e.message ?? "Couldn't send password reset email");
+      notifyListeners();
+    } catch (e) {
+      _status = Status.authenticateException(e.toString());
+      notifyListeners();
     }
   }
 

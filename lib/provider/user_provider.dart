@@ -65,4 +65,25 @@ class UserProvider with ChangeNotifier {
 
     return professionals;
   }
+
+  Future<void> deleteUser(String uid) async {
+    // Delete from Firestore
+    await firestoreProvider.firebaseFirestore.collection(FirestoreConstants.pathUserCollection).doc(uid).delete();
+
+    // Delete from Firebase Auth
+    final user = firestoreProvider.firebaseAuth.currentUser;
+    if (user != null && user.uid == uid) {
+      await user.delete();
+    }
+
+    // Clear local data
+    await firestoreProvider.prefs.clear();
+  }
+
+  Future<void> signOut() async {
+    await firestoreProvider.firebaseAuth.signOut();
+    await firestoreProvider.prefs.clear();
+  }
+
+
 }

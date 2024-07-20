@@ -17,4 +17,5 @@ class AppStrings {
   static const report = 'Report';
   static const appointment = 'Appointment';
   static const my_appointments = 'My Appoinments';
+  static const forgotPassword = 'Forgot Password';
 }
