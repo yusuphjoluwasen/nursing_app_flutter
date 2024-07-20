@@ -68,7 +68,7 @@ class HomePageState extends State<HomePage> {
             icon: Icon(Icons.messenger_outline), label: ''
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications), label: ''
+            icon: Icon(Icons.private_connectivity_rounded), label: ''
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person), label: ''

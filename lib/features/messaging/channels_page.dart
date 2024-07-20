@@ -8,8 +8,30 @@ import 'package:provider/provider.dart';
 import '../../provider/providers.dart';
 import 'group_chat_page.dart';
 
-class MessagingPage extends StatelessWidget {
+class MessagingPage extends StatefulWidget {
   const MessagingPage({super.key});
+
+  @override
+  State<MessagingPage> createState() => _MessagingPageState();
+}
+
+class _MessagingPageState extends State<MessagingPage> {
+  List<QueryDocumentSnapshot> _allChannels = [];
+  List<QueryDocumentSnapshot> _filteredChannels = [];
+  bool _isLoading = true;
+
+  void _filterChannels(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        _filteredChannels = _allChannels;
+      } else {
+        _filteredChannels = _allChannels
+            .where((channel) =>
+            (channel['title'] ?? '').toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +63,7 @@ class MessagingPage extends StatelessWidget {
               const SizedBox(height: 25),
               TextFormField(
                 decoration: buildInputDecoration(hintText: 'Search'),
+                onChanged: _filterChannels,
               ),
               const SizedBox(height: 15),
               Expanded(
@@ -56,26 +79,32 @@ class MessagingPage extends StatelessWidget {
                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                       return const Center(child: Text('No channels available'));
                     }
-                    final channels = snapshot.data!.docs;
+                    _allChannels = snapshot.data!.docs;
+                    _filteredChannels = _filteredChannels.isEmpty
+                        ? _allChannels
+                        : _filteredChannels;
                     return ListView.builder(
-                      itemCount: channels.length,
+                      itemCount: _filteredChannels.length,
                       itemBuilder: (context, index) {
-                        final channel = channels[index];
+                        final channel = _filteredChannels[index];
                         final docId = channel.id;
                         return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                        MaterialPageRoute(
-                                                builder: (context) => GroupChatPage(
-                                                  pageTitle: channel['title'] ?? 'No Name',
-                                                  docId: docId,
-                                                ),
-                                              ),
-                                    );
-                                  },
-                                  child: CardItem(cardItem: {'title':  channel['title'], 'image': "assets/images/messaging_item_icon.png"}),
-                                );
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GroupChatPage(
+                                  pageTitle: channel['title'] ?? 'No Name',
+                                  docId: docId,
+                                ),
+                              ),
+                            );
+                          },
+                          child: CardItem(cardItem: {
+                            'title': channel['title'] ?? 'No Name',
+                            'image': "assets/images/messaging_item_icon.png"
+                          }),
+                        );
                       },
                     );
                   },
