@@ -1,28 +1,78 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
-import 'package:nursing_mother_medical_app/login_page.dart';
-import 'package:nursing_mother_medical_app/onboarding_screen.dart';
-import 'package:nursing_mother_medical_app/features//onboarding_screen_new.dart';
-import 'package:nursing_mother_medical_app/features/onboarding_view.dart';
-
-import 'features/onboarding_view.dart';
+import 'package:nursing_mother_medical_app/features/onboarding/onboarding_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'firebase_options.dart';
+import 'features/onboarding/onboarding_view.dart';
 import 'navigation/navigation_service.dart';
 import 'navigation/routes.dart';
+import 'provider/providers.dart';
 
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final NavigationService navigationService = NavigationService();
-  runApp(MyApp(navigationService: navigationService));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(navigationService: navigationService, prefs: prefs));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.navigationService});
+
+  MyApp({super.key, required this.navigationService, required this.prefs});
   final NavigationService navigationService;
+  final SharedPreferences prefs;
+  final _firebaseFirestore = FirebaseFirestore.instance;
+  final _firebaseStorage = FirebaseStorage.instance;
+  final _firebaseAuth = FirebaseAuth.instance;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+        providers: [
+          Provider<FirestoreProvider>(
+            create: (_) => FirestoreProvider(
+              firebaseFirestore: _firebaseFirestore,
+              prefs: prefs,
+            ),
+          ),
+          ChangeNotifierProvider<UserProvider>(
+            create: (context) => UserProvider(
+              firestoreProvider: Provider.of<FirestoreProvider>(context, listen: false),
+            ),
+          ),
+          ChangeNotifierProvider<StorageProvider>(
+            create: (_) => StorageProvider(firebaseStorage: _firebaseStorage),
+          ),
+          ChangeNotifierProvider<AuthProviders>(
+            create: (context) => AuthProviders(
+              firebaseAuth: _firebaseAuth,
+              userProvider: Provider.of<UserProvider>(context, listen: false),
+              storageProvider: Provider.of<StorageProvider>(context, listen: false),
+              prefs: prefs,
+            ),
+          ),
+          ChangeNotifierProvider<ChatProvider>(
+            create: (context) => ChatProvider(
+              firestoreProvider: Provider.of<FirestoreProvider>(context, listen: false),
+              firebaseStorage: _firebaseStorage,
+            ),
+          ),
+          ChangeNotifierProvider<AppointmentProvider>(
+            create: (context) => AppointmentProvider(
+              firestoreProvider: Provider.of<FirestoreProvider>(context, listen: false),
+            ),
+          ),
+        ],
+      child: MaterialApp(
       title: 'Flutter Demoo',
       navigatorKey: navigationService.navigatorKey,
       onGenerateRoute: AppRoutes.generateRoute,
@@ -75,6 +125,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const OnboardingView(),
+    )
     );
   }
 }

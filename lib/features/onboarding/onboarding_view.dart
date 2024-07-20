@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/config/app_strings.dart';
-import 'package:nursing_mother_medical_app/features/login.dart';
-import 'package:nursing_mother_medical_app/features/login/login_play.dart';
 import 'package:nursing_mother_medical_app/features/onboarding/onboarding_items.dart';
-import 'package:nursing_mother_medical_app/features/onboarding_screen_new.dart';
-import 'package:nursing_mother_medical_app/features/welcome.dart';
+import 'package:nursing_mother_medical_app/features/onboarding/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

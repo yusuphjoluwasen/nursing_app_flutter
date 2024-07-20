@@ -10,12 +10,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:nursing_mother_medical_app/main.dart';
 import 'package:nursing_mother_medical_app/navigation/navigation_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     final NavigationService navigationService = NavigationService();
-    await tester.pumpWidget( MyApp(navigationService: navigationService));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await tester.pumpWidget( MyApp(navigationService: navigationService, prefs:prefs));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

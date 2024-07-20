@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
-import 'package:nursing_mother_medical_app/features//messaging_page.dart';
-import 'package:nursing_mother_medical_app/features/professional_page.dart';
-import 'package:nursing_mother_medical_app/features/profile_page.dart';
+import 'package:nursing_mother_medical_app/features/messaging/channels_page.dart';
+import 'package:nursing_mother_medical_app/features/professional/professional_page.dart';
+import 'package:nursing_mother_medical_app/features/profile/profile_page.dart';
 import 'package:nursing_mother_medical_app/features/supportlibrary/support_library.dart';
 
 class HomePage extends StatefulWidget {

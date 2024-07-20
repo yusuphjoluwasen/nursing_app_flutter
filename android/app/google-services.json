@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204040021736",
+    "project_id": "nursingmother-64709",
+    "storage_bucket": "nursingmother-64709.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204040021736:android:dd18bc886f4ee7182f4b5d",
+        "android_client_info": {
+          "package_name": "com.example.app.nursing_mother_medical_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGEOk5oGYeAeHxOpbfTdQAE3M_Uu-qQKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

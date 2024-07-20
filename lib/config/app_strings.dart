@@ -16,4 +16,5 @@ class AppStrings {
   static const profile = 'My Profile';
   static const report = 'Report';
   static const appointment = 'Appointment';
+  static const my_appointments = 'My Appoinments';
 }

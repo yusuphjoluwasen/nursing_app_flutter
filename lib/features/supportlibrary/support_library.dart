@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nursing_mother_medical_app/features/login/login_play.dart';
-import 'package:nursing_mother_medical_app/features/register.dart';
+import 'package:nursing_mother_medical_app/features/register/register.dart';
 import 'package:nursing_mother_medical_app/features/supportlibrary/support_library_list_item.dart';
 
 import '../../config/app_colors.dart';
@@ -75,7 +75,6 @@ class SupportLibraryList extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            print('${supportList[index]['title']} clicked');
             Navigator.push(
               context,
               MaterialPageRoute(

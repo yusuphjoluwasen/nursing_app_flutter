@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCAIlj_uNsO6RtYU13Y0j4plBvFn9okksw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>204040021736</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.nursingMotherMedicalApp</string>
+	<key>PROJECT_ID</key>
+	<string>nursingmother-64709</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nursingmother-64709.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:204040021736:ios:b584f74cbbd84fd92f4b5d</string>
+</dict>
+</plist>

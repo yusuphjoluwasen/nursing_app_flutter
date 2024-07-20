@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nursing_mother_medical_app/features/login/login_play.dart';
-import 'package:nursing_mother_medical_app/features/register.dart';
+import 'package:nursing_mother_medical_app/features/register/register.dart';
 
-import '../config/app_colors.dart';
-import '../config/app_strings.dart';
-import '../reusables/form/app_button.dart';
+import '../../config/app_colors.dart';
+import '../../config/app_strings.dart';
+import '../../reusables/form/app_button.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
