@@ -66,7 +66,8 @@ class _SupportLibraryPageState extends State<SupportLibraryPage> {
                 child: SupportLibraryList(
                   supportList: _filteredSupportList,
                   pageBuilder: (context, item) {
-                    return SupportLibraryListItemPage(pageTitle: item['title']!);
+                    return SupportLibraryListItemPage(pageTitle:
+                    item['title']!,  pageDetail: item['details']!);
                   },
                 ),
               ),

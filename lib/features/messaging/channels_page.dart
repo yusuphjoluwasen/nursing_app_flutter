@@ -18,7 +18,6 @@ class MessagingPage extends StatefulWidget {
 class _MessagingPageState extends State<MessagingPage> {
   List<QueryDocumentSnapshot> _allChannels = [];
   List<QueryDocumentSnapshot> _filteredChannels = [];
-  bool _isLoading = true;
 
   void _filterChannels(String query) {
     setState(() {

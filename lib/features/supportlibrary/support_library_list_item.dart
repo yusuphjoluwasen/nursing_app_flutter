@@ -10,9 +10,10 @@ import '../../reusables/form/app_button.dart';
 import '../../reusables/form/input_decoration.dart';
 
 class SupportLibraryListItemPage extends StatelessWidget {
-   const SupportLibraryListItemPage({super.key, required this.pageTitle});
+   const SupportLibraryListItemPage({super.key, required this.pageTitle, required this.pageDetail});
 
    final String pageTitle;
+   final String pageDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class SupportLibraryListItemPage extends StatelessWidget {
           child: Column(children: [
 
             SingleChildScrollView(child: Text(
-              "This first week is actually your menstrual period Because your expected birth date (EDD or EDB) is calculated from the first day of your last period.",
+              pageDetail,
               style: Theme.of(context)
                   .textTheme
                   .labelSmall

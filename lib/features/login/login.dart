@@ -6,9 +6,11 @@ import 'package:nursing_mother_medical_app/config/app_strings.dart';
 import 'package:nursing_mother_medical_app/features/login/forgot_pasword.dart';
 import 'package:nursing_mother_medical_app/features/register/register.dart';
 import 'package:nursing_mother_medical_app/features/supportlibrary/support_library.dart';
+import 'package:nursing_mother_medical_app/navigation/routes.dart';
 import 'package:nursing_mother_medical_app/reusables/form/app_button.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/navigation_provider.dart';
 import '../../provider/auth_provider.dart';
 import '../../reusables/LoadingView.dart';
 import '../../reusables/form/input_decoration.dart';
@@ -54,6 +56,8 @@ class LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     final authProvider = Provider.of<AuthProviders>(context);
+    final navigator = Provider.of<NavigationProvider>(context, listen: false);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (authProvider.status.type == StatusType.authenticateError) {
         Fluttertoast.showToast(msg: authProvider.status.errorMessage ?? "");
@@ -65,6 +69,7 @@ class LoginFormState extends State<LoginForm> {
     });
 
     return SafeArea(
+        child: SingleChildScrollView(
         child: Form(
             key: _formKey,
             child: Container(
@@ -150,13 +155,7 @@ class LoginFormState extends State<LoginForm> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                            // const Register(userType: 'professional'),
-                          ),
-                        );
+                       navigator.replaceWith(AppRoutes.welcome);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -181,12 +180,7 @@ class LoginFormState extends State<LoginForm> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgotPasswordPage(),
-                          ),
-                        );
+                       navigator.navigateTo(AppRoutes.forgotPassword);
                       },
                       child: Center(
                           child: Text("Forgot Password",
@@ -196,6 +190,7 @@ class LoginFormState extends State<LoginForm> {
                                   ?.copyWith(color: AppColors.black))))
                 ],
               ),
-            )));
+            )))
+    );
   }
 }

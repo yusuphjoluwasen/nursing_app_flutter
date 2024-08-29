@@ -108,7 +108,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.send),
+                      icon: const Icon(Icons.send),
                       onPressed: () {
                         final text = _messageController.text.trim();
                         if (text.isNotEmpty) {

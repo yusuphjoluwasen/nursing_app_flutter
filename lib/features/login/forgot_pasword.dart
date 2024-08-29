@@ -4,7 +4,7 @@ import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/config/app_strings.dart';
 import 'package:nursing_mother_medical_app/reusables/LoadingView.dart';
 import 'package:provider/provider.dart';
-import '../../provider/auth_provider.dart';
+import 'package:nursing_mother_medical_app/provider/providers.dart';
 import '../../reusables/form/input_decoration.dart';
 import '../../reusables/form/app_button.dart';
 
@@ -59,6 +59,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Provider.of<NavigationProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -72,7 +74,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Go back to the previous page
+            navigator.goBack(); // Go back to the previous page
           },
         ),
       ),

@@ -4,3 +4,4 @@ export 'storage_provider.dart';
 export 'user_provider.dart';
 export 'chat_provider.dart';
 export 'appointment_provider.dart';
+export 'navigation_provider.dart';

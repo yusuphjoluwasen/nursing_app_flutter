@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nursing_mother_medical_app/reusables/form/input_decoration.dart';
 import 'package:provider/provider.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/features/messaging/report_page.dart';
@@ -100,12 +101,7 @@ class _PrivateChatPageState extends State<PrivateChatPage> {
                     Expanded(
                       child: TextField(
                         controller: _messageController,
-                        decoration: InputDecoration(
-                          hintText: 'Type a message',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
+                        decoration: buildInputDecoration(hintText: "Type a message"),
                       ),
                     ),
                     IconButton(

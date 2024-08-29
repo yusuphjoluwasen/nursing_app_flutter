@@ -95,21 +95,21 @@ class _ProfessionalPageListState extends State<ProfessionalPageList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  professionalList[index].name,
+                                  professionalList[index].firstname,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall
                                       ?.copyWith(color: AppColors.black),
                                 ),
                                 Text(
-                                  professionalList[index].title,
+                                  professionalList[index].hcp,
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelSmall
                                       ?.copyWith(color: AppColors.black),
                                 ),
                                 Text(
-                                  professionalList[index].description,
+                                  professionalList[index].bio,
                                   style: const TextStyle(
                                       fontSize: 12,
                                       color: AppColors.greyTextColor,

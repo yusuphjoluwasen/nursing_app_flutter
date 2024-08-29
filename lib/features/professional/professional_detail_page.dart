@@ -71,7 +71,7 @@ class _ProfessionalDetailPageState extends State<ProfessionalDetailPage> {
             ),
             const SizedBox(height: 10),
             Text(
-              widget.professional.name,
+              widget.professional.firstname,
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -79,7 +79,7 @@ class _ProfessionalDetailPageState extends State<ProfessionalDetailPage> {
                   ?.copyWith(color: AppColors.black),
             ),
             Text(
-              widget.professional.title,
+              widget.professional.hcp,
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -88,7 +88,7 @@ class _ProfessionalDetailPageState extends State<ProfessionalDetailPage> {
             ),
             const SizedBox(height: 16),
             Text(
-              widget.professional.description,
+              widget.professional.bio,
               textAlign: TextAlign.start,
               style: const TextStyle(
                   fontSize: 12,

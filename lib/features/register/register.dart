@@ -6,9 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/config/app_measurements.dart';
 import 'package:nursing_mother_medical_app/config/app_strings.dart';
+import 'package:nursing_mother_medical_app/navigation/routes.dart';
 import 'package:nursing_mother_medical_app/reusables/form/app_button.dart';
 import 'package:provider/provider.dart';
 import '../../model/model.dart';
+import '../../provider/navigation_provider.dart';
 import '../../reusables/form/input_decoration.dart';
 import '../../provider/auth_provider.dart';
 import '../home/home.dart';
@@ -74,6 +76,7 @@ class RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProviders>(context);
+    final navigator = Provider.of<NavigationProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (authProvider.status.type == StatusType.authenticateError) {
@@ -176,9 +179,9 @@ class RegisterFormState extends State<RegisterForm> {
                 const SizedBox(height: 20),
                 DateTimeFormField(
                   decoration: buildInputDecoration(hintText: 'Date of Birth'),
-                  firstDate: DateTime.now().add(const Duration(days: 10)),
-                  lastDate: DateTime.now().add(const Duration(days: 40)),
-                  initialPickerDateTime: DateTime.now().add(const Duration(days: 20)),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                  initialPickerDateTime: DateTime.now().subtract(const Duration(days: 365 * 18)),
                   onChanged: (DateTime? value) {
                     selectedDate = value!;
                   },
@@ -226,12 +229,7 @@ class RegisterFormState extends State<RegisterForm> {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
-                      ),
-                    );
+                   navigator.replaceWith(AppRoutes.login);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBGEOk5oGYeAeHxOpbfTdQAE3M_Uu-qQKY',
-    appId: '1:204040021736:android:dd18bc886f4ee7182f4b5d',
+    appId: '1:204040021736:android:1fd81e71c30d844f2f4b5d',
     messagingSenderId: '204040021736',
     projectId: 'nursingmother-64709',
     storageBucket: 'nursingmother-64709.appspot.com',
@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'nursingmother-64709.appspot.com',
     measurementId: 'G-43DZLRCKXE',
   );
+
 }

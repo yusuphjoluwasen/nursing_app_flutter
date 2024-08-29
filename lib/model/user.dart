@@ -2,17 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
   final String id;
-  final String name;
-  final String title;
-  final String description;
+  final String firstname;
+  final String hcp;
+  final String bio;
   final String photoUrl;
   final String type;
 
   User({
     required this.id,
-    required this.name,
-    required this.title,
-    required this.description,
+    required this.firstname,
+    required this.hcp,
+    required this.bio,
     required this.photoUrl,
     required this.type,
   });
@@ -20,9 +20,9 @@ class User {
   factory User.fromDocument(DocumentSnapshot doc) {
     return User(
       id: doc['id'],
-      name: doc['name'],
-      title: doc['title'],
-      description: doc['description'],
+      firstname: doc['firstname'],
+      hcp: doc['hcp'],
+      bio: doc['bio'],
       photoUrl: doc['photoUrl'],
       type: doc['type'],
     );

@@ -3,8 +3,11 @@ import 'package:nursing_mother_medical_app/config/app_colors.dart';
 import 'package:nursing_mother_medical_app/config/app_strings.dart';
 import 'package:nursing_mother_medical_app/features/onboarding/onboarding_items.dart';
 import 'package:nursing_mother_medical_app/features/onboarding/welcome.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../navigation/routes.dart';
+import '../../provider/providers.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -21,13 +24,14 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
+    final navigatorProvider = Provider.of<NavigationProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: AppColors.white,
 
       bottomSheet: Container(
         color:AppColors.white,
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        child: isLastPage? getStarted() : Row(
+        child: isLastPage? getStarted(navigatorProvider) : Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
 
@@ -103,7 +107,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   //Get started button
 
-  Widget getStarted(){
+  Widget getStarted(NavigationProvider navigatorProvider){
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -119,7 +123,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             //After we press get started button this onboarding value become true
             // same key
             if(!mounted)return;
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WelcomePage()));
+            navigatorProvider.replaceWith(AppRoutes.welcome);
           },
           child: const Text("Get started",style: TextStyle(color: Colors.white),)),
     );
